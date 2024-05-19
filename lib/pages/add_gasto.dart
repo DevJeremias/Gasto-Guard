@@ -27,8 +27,8 @@ class _AddGastoState extends State<AddGasto> {
   void initState() {
     super.initState();
 
-    // Inicialize o _dataController com a data atual
-    _dataController.text = DateFormat('yyyy-MM-dd').format(_data);
+    // Inicialize o _dataController com a data atual no formato 'dia/mês/ano'
+    _dataController.text = DateFormat('dd/MM/yyyy').format(_data);
   }
 
   void _pickIcon() async {
@@ -128,7 +128,7 @@ class _AddGastoState extends State<AddGasto> {
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2100),
                 ))!;
-                _dataController.text = DateFormat('yyyy-MM-dd').format(_data);
+                _dataController.text = DateFormat('dd/MM/yyyy').format(_data);
               },
             ),
             TextFormField(
