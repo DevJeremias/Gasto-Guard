@@ -101,8 +101,7 @@ class _AddGastoState extends State<AddGasto> {
         title: Text('Adicionar Gasto'),
       ),
       body: Padding(
-        // Adicione este widget
-        padding: EdgeInsets.all(10.0), // Defina a margem que você deseja
+        padding: EdgeInsets.all(10.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -157,8 +156,20 @@ class _AddGastoState extends State<AddGasto> {
                   ),
                 ),
               ),
+              // Adicione um SizedBox para criar uma margem acima do botão
+              SizedBox(height: 20.0),
+
               ElevatedButton(
-                child: Text('Salvar'),
+                child: Text(
+                  'Salvar',
+                  style: TextStyle(
+                    color: Colors.white, // Letras brancas
+                    fontWeight: FontWeight.bold, // Letras em negrito
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, // Botão azul
+                ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
