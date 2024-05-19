@@ -1,5 +1,6 @@
 // Importando o pacote de material do Flutter
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Importe o pacote intl para usar o DateFormat
 
 // Classe Gasto que representa um gasto
 class Gasto {
@@ -44,7 +45,8 @@ class GastoWidget extends StatelessWidget {
         // Título do ListTile
         title: Text(gasto.titulo),
         // Subtítulo do ListTile
-        subtitle: Text('Valor: ${gasto.valor}\nData: ${gasto.data}'),
+        subtitle: Text(
+            'Valor: ${gasto.valor}\nData: ${DateFormat('dd/MM/yyyy').format(gasto.data)}'),
       ),
     );
   }
