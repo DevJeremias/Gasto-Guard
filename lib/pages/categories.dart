@@ -3,21 +3,26 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'gasto.dart'; // Importe a classe Gasto
 import 'add_gasto.dart'; // Importe a classe AddGasto
 
+// Esta é a sua página de categorias
 class CategoriesPage extends StatefulWidget {
   @override
   _CategoriesPageState createState() => _CategoriesPageState();
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
+  // Esta é a lista de gastos
   final List<Gasto> _gastos = [];
+  // Esta é a cor do ícone
   Color _iconColor = Colors.black;
 
+  // Este método adiciona um gasto à lista de gastos
   void _addGasto(Gasto gasto) {
     setState(() {
       _gastos.add(gasto);
     });
   }
 
+  // Este método mostra um diálogo para escolher uma cor
   void _showColorPickerDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -55,23 +60,32 @@ class _CategoriesPageState extends State<CategoriesPage> {
       appBar: AppBar(
         title: Text('Gasto Guard'),
       ),
-      body: Center(
+      body: Container(
+        // Adicionado um Container para ocupar toda a tela
+        margin: EdgeInsets.all(10.0), // Adicionado margem de 10.0
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('Bem-vindo à página de Categorias!'),
-            ElevatedButton(
-              child: Text('Adicionar Gasto'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddGasto(_addGasto)),
-                );
-              },
+            Expanded(
+              // Adicionado um widget Expanded para ocupar o espaço restante
+              child: ListView(
+                // Adicionado um ListView para exibir a lista de gastos
+                children: _gastos.map((gasto) => GastoWidget(gasto)).toList(),
+              ),
             ),
-            ..._gastos.map((gasto) => Text(gasto.titulo)),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        // Adicionado um FloatingActionButton
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddGasto(_addGasto)),
+          );
+        },
       ),
     );
   }

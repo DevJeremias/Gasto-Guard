@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Importe o pacote intl para usar o DateFormat
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'gasto.dart'; // Importe a classe Gasto
+import 'icons.dart'; // Importe o arquivo icons.dart
 
 class AddGasto extends StatefulWidget {
   final Function addGasto;
@@ -31,7 +32,38 @@ class _AddGastoState extends State<AddGasto> {
   }
 
   void _pickIcon() async {
-    // Removi a função de seleção de ícone devido a um erro na instrução de importação.
+    // Função para selecionar um ícone
+    IconData? icon = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Escolha um ícone'),
+          content: SingleChildScrollView(
+            child: Wrap(
+              spacing: 10,
+              children: categoriasIcones.map((categoriaIcone) {
+                return IconButton(
+                  icon: Icon(categoriaIcone.icone),
+                  onPressed: () {
+                    Navigator.of(context).pop(categoriaIcone.icone);
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+        );
+      },
+    );
+
+    if (icon != null) {
+      setState(() {
+        _categoriaIcone = icon;
+      });
+    }
+  }
+
+  void _pickColor() async {
+    // Função para selecionar uma cor
     Color? color = await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -51,7 +83,6 @@ class _AddGastoState extends State<AddGasto> {
           ),
           actions: <Widget>[
             TextButton(
-              // Alterado de FlatButton para TextButton, pois FlatButton está obsoleto.
               child: const Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop(_categoriaCor);
@@ -103,9 +134,18 @@ class _AddGastoState extends State<AddGasto> {
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Categoria',
-                suffixIcon: IconButton(
-                  icon: Icon(_categoriaIcone, color: _categoriaCor),
-                  onPressed: _pickIcon,
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(_categoriaIcone, color: _categoriaCor),
+                      onPressed: _pickIcon,
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.color_lens, color: _categoriaCor),
+                      onPressed: _pickColor,
+                    ),
+                  ],
                 ),
               ),
             ),
