@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Importe o pacote intl para usar o DateFormat
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+// ignore: depend_on_referenced_packages
+import 'package:intl/intl.dart'; // Importe o pacote intl para usar o DateFormat
 import 'gasto.dart'; // Importe a classe Gasto
 import 'icons.dart'; // Importe o arquivo icons.dart
 
 class AddGasto extends StatefulWidget {
   final Function addGasto;
-  AddGasto(this.addGasto);
+  // ignore: use_key_in_widget_constructors
+  const AddGasto(this.addGasto);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddGastoState createState() => _AddGastoState();
 }
 
@@ -64,6 +67,7 @@ class _AddGastoState extends State<AddGasto> {
 
   void _pickColor() async {
     // Função para selecionar uma cor
+    // ignore: unused_local_variable
     Color? color = await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -77,7 +81,6 @@ class _AddGastoState extends State<AddGasto> {
                   _categoriaCor = color;
                 });
               },
-              showLabel: true,
               pickerAreaHeightPercent: 0.8,
             ),
           ),
@@ -98,22 +101,23 @@ class _AddGastoState extends State<AddGasto> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // ignore: prefer_const_constructors
         title: Text('Adicionar Gasto'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(labelText: 'Título'),
+                decoration: const InputDecoration(labelText: 'Título'),
                 onSaved: (value) {
                   _titulo = value!;
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Valor'),
+                decoration: const InputDecoration(labelText: 'Valor'),
                 keyboardType: TextInputType.number,
                 onSaved: (value) {
                   _valor = double.parse(value!);
@@ -121,8 +125,9 @@ class _AddGastoState extends State<AddGasto> {
               ),
               TextFormField(
                 controller: _dataController,
-                decoration: InputDecoration(labelText: 'Data'),
+                decoration: const InputDecoration(labelText: 'Data'),
                 onTap: () async {
+                  // ignore: unnecessary_new
                   FocusScope.of(context).requestFocus(new FocusNode());
                   DateTime? selectedDate = await showDatePicker(
                     context: context,
@@ -132,12 +137,12 @@ class _AddGastoState extends State<AddGasto> {
                     builder: (BuildContext context, Widget? child) {
                       return Theme(
                         data: ThemeData.light().copyWith(
-                          colorScheme: ColorScheme.light(
+                          colorScheme: const ColorScheme.light(
                             primary: Colors.blue, // Cor do cabeçalho
                             onPrimary:
                                 Colors.white, // Cor do texto no cabeçalho
                           ),
-                          buttonTheme: ButtonThemeData(
+                          buttonTheme: const ButtonThemeData(
                             textTheme: ButtonTextTheme
                                 .primary, // Cor do botão 'OK' e 'Cancelar'
                           ),
@@ -173,16 +178,9 @@ class _AddGastoState extends State<AddGasto> {
                 ),
               ),
               // Adicione um SizedBox para criar uma margem acima do botão
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
 
               ElevatedButton(
-                child: Text(
-                  'Salvar',
-                  style: TextStyle(
-                    color: Colors.white, // Letras brancas
-                    fontWeight: FontWeight.bold, // Letras em negrito
-                  ),
-                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Botão azul
                 ),
@@ -206,6 +204,13 @@ class _AddGastoState extends State<AddGasto> {
                     Navigator.pop(context);
                   }
                 },
+                child: const Text(
+                  'Salvar',
+                  style: TextStyle(
+                    color: Colors.white, // Letras brancas
+                    fontWeight: FontWeight.bold, // Letras em negrito
+                  ),
+                ),
               ),
             ],
           ),
