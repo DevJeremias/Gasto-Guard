@@ -100,79 +100,88 @@ class _AddGastoState extends State<AddGasto> {
       appBar: AppBar(
         title: Text('Adicionar Gasto'),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Título'),
-              onSaved: (value) {
-                _titulo = value!;
-              },
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Valor'),
-              keyboardType: TextInputType.number,
-              onSaved: (value) {
-                _valor = double.parse(value!);
-              },
-            ),
-            TextFormField(
-              controller: _dataController,
-              decoration: InputDecoration(labelText: 'Data'),
-              onTap: () async {
-                FocusScope.of(context).requestFocus(new FocusNode());
-                _data = (await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                ))!;
-                _dataController.text = DateFormat('dd/MM/yyyy').format(_data);
-              },
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Categoria',
-                suffixIcon: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(_categoriaIcone, color: _categoriaCor),
-                      onPressed: _pickIcon,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.color_lens, color: _categoriaCor),
-                      onPressed: _pickColor,
-                    ),
-                  ],
-                ),
+      body: Padding(
+        // Adicione este widget
+        padding: EdgeInsets.all(10.0), // Defina a margem que você deseja
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Título'),
+                onSaved: (value) {
+                  _titulo = value!;
+                },
               ),
-            ),
-            ElevatedButton(
-              child: Text('Salvar'),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-
-                  // Crie um novo objeto Gasto
-                  Gasto novoGasto = Gasto(
-                    titulo: _titulo,
-                    valor: _valor,
-                    data: _data,
-                    categoriaIcone: _categoriaIcone,
-                    categoriaCor: _categoriaCor,
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Valor'),
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  _valor = double.parse(value!);
+                },
+              ),
+              TextFormField(
+                controller: _dataController,
+                decoration: InputDecoration(labelText: 'Data'),
+                onTap: () async {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                  DateTime? selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
                   );
 
-                  // Adicione o novo gasto à lista de gastos
-                  widget.addGasto(novoGasto);
+                  if (selectedDate != null) {
+                    _data = selectedDate;
+                    _dataController.text =
+                        DateFormat('dd/MM/yyyy').format(_data);
+                  }
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Categoria',
+                  suffixIcon: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(_categoriaIcone, color: _categoriaCor),
+                        onPressed: _pickIcon,
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.color_lens, color: _categoriaCor),
+                        onPressed: _pickColor,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                child: Text('Salvar'),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
 
-                  // Feche a tela atual e volte para a tela anterior
-                  Navigator.pop(context);
-                }
-              },
-            ),
-          ],
+                    // Crie um novo objeto Gasto
+                    Gasto novoGasto = Gasto(
+                      titulo: _titulo,
+                      valor: _valor,
+                      data: _data,
+                      categoriaIcone: _categoriaIcone,
+                      categoriaCor: _categoriaCor,
+                    );
+
+                    // Adicione o novo gasto à lista de gastos
+                    widget.addGasto(novoGasto);
+
+                    // Feche a tela atual e volte para a tela anterior
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
