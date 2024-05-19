@@ -129,6 +129,22 @@ class _AddGastoState extends State<AddGasto> {
                     initialDate: DateTime.now(),
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2100),
+                    builder: (BuildContext context, Widget? child) {
+                      return Theme(
+                        data: ThemeData.light().copyWith(
+                          colorScheme: ColorScheme.light(
+                            primary: Colors.blue, // Cor do cabeçalho
+                            onPrimary:
+                                Colors.white, // Cor do texto no cabeçalho
+                          ),
+                          buttonTheme: ButtonThemeData(
+                            textTheme: ButtonTextTheme
+                                .primary, // Cor do botão 'OK' e 'Cancelar'
+                          ),
+                        ),
+                        child: child!,
+                      );
+                    },
                   );
 
                   if (selectedDate != null) {

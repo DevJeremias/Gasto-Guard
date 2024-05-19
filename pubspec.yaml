@@ -13,6 +13,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_iconpicker: ^3.0.1 # Adicionado aqui
   flutter_colorpicker: ^1.0.3 # Adicionado aqui
+  flutter_localizations: # Adicionado aqui
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
