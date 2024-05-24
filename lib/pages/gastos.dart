@@ -83,7 +83,8 @@ class _GastosPageState extends State<GastosPage> {
       ),
       floatingActionButton: FloatingActionButton(
         // Adicionado um FloatingActionButton
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, color: Colors.white),
+        backgroundColor: Colors.blue,
         onPressed: () {
           Navigator.push(
             context,

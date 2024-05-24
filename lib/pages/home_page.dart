@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
             context,
@@ -42,7 +42,8 @@ class HomePage extends StatelessWidget {
                     GastosPage()), // Alterado de 'CategoriesPage()' para 'GastosPage()'
           );
         },
-        child: Icon(Icons.add, color: Colors.white),
+        label: Text('Ver Gastos', style: TextStyle(color: Colors.white)),
+        icon: Icon(Icons.add, color: Colors.white),
         backgroundColor: Colors.blue,
       ),
     );
