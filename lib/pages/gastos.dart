@@ -3,13 +3,16 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'gasto.dart'; // Importe a classe Gasto
 import 'add_gasto.dart'; // Importe a classe AddGasto
 
-// Esta é a sua página de categorias
-class CategoriesPage extends StatefulWidget {
+// Esta é a sua página de gastos
+class GastosPage extends StatefulWidget {
+  // Alterado de 'CategoriesPage' para 'GastosPage'
   @override
-  _CategoriesPageState createState() => _CategoriesPageState();
+  _GastosPageState createState() =>
+      _GastosPageState(); // Alterado de '_CategoriesPageState' para '_GastosPageState'
 }
 
-class _CategoriesPageState extends State<CategoriesPage> {
+class _GastosPageState extends State<GastosPage> {
+  // Alterado de '_CategoriesPageState' para '_GastosPageState'
   // Esta é a lista de gastos
   final List<Gasto> _gastos = [];
   // Esta é a cor do ícone
@@ -66,7 +69,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Bem-vindo à página de Categorias!'),
+            Text(
+                'Bem-vindo à página de Gastos!'), // Alterado de 'Categorias' para 'Gastos'
             Expanded(
               // Adicionado um widget Expanded para ocupar o espaço restante
               child: ListView(

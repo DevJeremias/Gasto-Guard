@@ -15,6 +15,7 @@ dependencies:
   flutter_colorpicker: ^1.0.3 # Adicionado aqui
   flutter_localizations: # Adicionado aqui
     sdk: flutter
+  pie_chart: ^5.0.0 # Adicionado aqui
 
 dev_dependencies:
   flutter_test:
