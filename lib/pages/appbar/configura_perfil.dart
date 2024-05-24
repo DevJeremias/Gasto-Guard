@@ -1,27 +1,13 @@
 import 'package:flutter/material.dart';
-import 'start_page.dart';
-import 'home_page.dart';
 
-class CadastrarPage extends StatelessWidget {
-  CadastrarPage({Key? key}) : super(key: key);
-
-  final TextEditingController usuarioController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController senhaController = TextEditingController();
-
+class ConfiguraPerfil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastre-se no Gasto-Guard!',
+        title: Text('Configurações do Perfil',
             style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => StartPage()),
-          ),
-        ),
       ),
       body: SingleChildScrollView(
         // Adiciona rolagem
@@ -37,11 +23,10 @@ class CadastrarPage extends StatelessWidget {
                     size: 50, color: Colors.blue), // Ícone azul
               ),
               SizedBox(height: 20),
+              Text('Nome de usuário',
+                  style: TextStyle(color: Colors.blue)), // Texto azul
               TextField(
-                controller: usuarioController,
                 decoration: InputDecoration(
-                  labelText: 'Usuário',
-                  labelStyle: TextStyle(color: Colors.blue), // Texto azul
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue), // Borda azul
                   ),
@@ -50,11 +35,10 @@ class CadastrarPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
+              Text('E-mail',
+                  style: TextStyle(color: Colors.blue)), // Texto azul
               TextField(
-                controller: emailController,
                 decoration: InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(color: Colors.blue), // Texto azul
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue), // Borda azul
                   ),
@@ -63,12 +47,10 @@ class CadastrarPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
+              Text('Senha', style: TextStyle(color: Colors.blue)), // Texto azul
               TextField(
-                controller: senhaController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: 'Senha',
-                  labelStyle: TextStyle(color: Colors.blue), // Texto azul
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue), // Borda azul
                   ),
@@ -82,11 +64,9 @@ class CadastrarPage extends StatelessWidget {
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.blue, // Cor do texto
                 ),
-                child: Text('Cadastrar'),
+                child: Text('Salvar'),
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
+                  // Adicione a funcionalidade de salvar aqui
                 },
               ),
             ],
