@@ -65,6 +65,8 @@ class _AddGastoState extends State<AddGasto> {
       appBar: CustomAppBar(
         titleText: 'Adicionar Gasto',
         showBackButton: false,
+        onSettingsPressed: () {},
+        context: context,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

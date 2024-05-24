@@ -64,6 +64,8 @@ class _GastosPageState extends State<GastosPage> {
       appBar: CustomAppBar(
         titleText: 'Gasto Guard',
         showBackButton: false,
+        onSettingsPressed: () {},
+        context: context,
       ),
       body: Container(
         // Adicionado um Container para ocupar toda a tela

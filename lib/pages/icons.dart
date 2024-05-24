@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
-// Classe CategoriaIcone que representa uma categoria e seu ícone correspondente
 class CategoriaIcone {
   final String nome;
   final IconData icone;
-  final Color cor; // Adicionando um campo de cor
+  final Color cor;
+  final double valor_gasto; // Adicionando um campo para o valor gasto
 
-  CategoriaIcone(
-      this.nome, this.icone, this.cor); // Adicionando cor ao construtor
+  CategoriaIcone(this.nome, this.icone, this.cor,
+      this.valor_gasto); // Adicionando valor_gasto ao construtor
 }
 
-// Lista de categorias e seus ícones correspondentes
 List<CategoriaIcone> categoriasIcones = [
-  CategoriaIcone('padaria', Icons.cake, Colors.red),
-  CategoriaIcone('farmacia', Icons.local_pharmacy, Colors.orange),
-  CategoriaIcone('mercado', Icons.shopping_cart, Colors.yellow),
-  CategoriaIcone('hospital', Icons.local_hospital, Colors.green),
-  CategoriaIcone('ensino', Icons.school, Colors.blue),
-  CategoriaIcone('lanche', Icons.fastfood, Colors.indigo),
-  CategoriaIcone('comida', Icons.restaurant, Colors.purple),
-  CategoriaIcone('lazer', Icons.beach_access, Colors.pink),
-  CategoriaIcone('investimento', Icons.trending_up, Colors.teal),
-  CategoriaIcone('transporte', Icons.directions_bus, Colors.cyan),
-  CategoriaIcone('outro', Icons.more_horiz, Colors.brown),
+  CategoriaIcone('padaria', Icons.cake, Colors.red, 15.0),
+  CategoriaIcone('farmacia', Icons.local_pharmacy, Colors.orange, 15.0),
+  CategoriaIcone('mercado', Icons.shopping_cart, Colors.yellow, 15.0),
+  CategoriaIcone('hospital', Icons.local_hospital, Colors.green, 15.0),
+  CategoriaIcone('ensino', Icons.school, Colors.blue, 15.0),
+  CategoriaIcone('comida', Icons.restaurant, Colors.purple, 15.0),
+  CategoriaIcone('lazer', Icons.beach_access,
+      const Color.fromARGB(255, 242, 108, 152), 15.0),
+  CategoriaIcone(
+      'investimento', Icons.trending_up, Color.fromARGB(255, 12, 93, 38), 15.0),
+  CategoriaIcone('transporte', Icons.directions_bus, Colors.cyan, 15.0),
+  CategoriaIcone('outro', Icons.more_horiz, Colors.brown, 15.0),
 ];

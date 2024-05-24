@@ -8,7 +8,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double total = 1000.00;
     return Scaffold(
-      appBar: CustomAppBar(titleText: 'Gasto Guard', showBackButton: false),
+      appBar: CustomAppBar(
+        titleText: 'Gasto Guard',
+        showBackButton: false,
+        onSettingsPressed: () {},
+        context: context,
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
