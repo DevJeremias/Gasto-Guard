@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'gasto.dart'; // Importe a classe Gasto
 import 'add_gasto.dart'; // Importe a classe AddGasto
+import 'appbar/app_bar.dart'; // Importe a classe CustomAppBar
 
 // Esta é a sua página de gastos
 class GastosPage extends StatefulWidget {
@@ -60,8 +61,9 @@ class _GastosPageState extends State<GastosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Gasto Guard'),
+      appBar: CustomAppBar(
+        titleText: 'Gasto Guard',
+        showBackButton: false,
       ),
       body: Container(
         // Adicionado um Container para ocupar toda a tela
@@ -81,16 +83,16 @@ class _GastosPageState extends State<GastosPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        // Adicionado um FloatingActionButton
-        child: Icon(Icons.add, color: Colors.white),
-        backgroundColor: Colors.blue,
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddGasto(_addGasto)),
           );
         },
+        label: Text('Adicionar Gasto', style: TextStyle(color: Colors.white)),
+        icon: Icon(Icons.add, color: Colors.white),
+        backgroundColor: Colors.blue,
       ),
     );
   }

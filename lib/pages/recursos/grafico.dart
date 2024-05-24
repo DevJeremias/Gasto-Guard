@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+import '../icons.dart';
+// Importando o arquivo icons.dart
+
 class PieChartWidget extends StatelessWidget {
   final Map<String, double> dataMap;
 
@@ -12,18 +15,10 @@ class PieChartWidget extends StatelessWidget {
   }
 
   static PieChartWidget createWithSampleData() {
+    // Criando um Map com os nomes das categorias e um valor de exemplo
     Map<String, double> dataMap = {
-      "Fatia 1": 1,
-      "Fatia 2": 2,
-      "Fatia 3": 3,
-      "Fatia 4": 4,
-      "Fatia 5": 5,
-      "Fatia 6": 6,
-      "Fatia 7": 7,
-      "Fatia 8": 8,
-      "Fatia 9": 9,
-      "Fatia 10": 10,
-      "Fatia 11": 11,
+      for (var i = 0; i < categoriasIcones.length; i++)
+        categoriasIcones[i].nome: (i + 1).toDouble(),
     };
     return PieChartWidget(dataMap: dataMap);
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Importe o pacote intl para usar o DateFormat
 import 'gasto.dart'; // Importe a classe Gasto
 import 'icons.dart'; // Importe o arquivo icons.dart
+import 'appbar/app_bar.dart'; // Importe a classe CustomAppBar
 
 class AddGasto extends StatefulWidget {
   final Function addGasto;
@@ -61,8 +62,9 @@ class _AddGastoState extends State<AddGasto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Adicionar Gasto'),
+      appBar: CustomAppBar(
+        titleText: 'Adicionar Gasto',
+        showBackButton: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

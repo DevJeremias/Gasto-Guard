@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'appbar/app_bar.dart';
 import 'gastos.dart'; // Alterado de 'categories.dart' para 'gastos.dart'
-import 'recursos/pie_chart_widget.dart'; // Adicione esta linha
+import 'recursos/grafico.dart'; // Adicione esta linha
 
 class HomePage extends StatelessWidget {
   @override
