@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'appbar/app_bar.dart';
-import 'gastos.dart'; // Alterado de 'categories.dart' para 'gastos.dart'
-import 'recursos/grafico.dart'; // Adicione esta linha
-import 'gasto.dart'; // Importe a classe Gasto
+import 'gastos.dart';
+import 'recursos/grafico.dart';
+import 'gasto_provider.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  List<Gasto> _gastos = [];
-
-  double get total {
-    return _gastos.fold(0, (sum, item) => sum + item.valor);
-  }
-
-  void _updateGastos(List<Gasto> gastos) {
-    setState(() {
-      _gastos = gastos;
-    });
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,26 +22,28 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Spacer(flex: 3),
-            PieChartWidget.createWithSampleData(), // Adicione esta linha
-            SizedBox(height: 20), // Adicione esta linha
+            PieChartWidget.createWithSampleData(),
+            SizedBox(height: 20),
             Text(
               'Total de Gastos',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10), // Adicione esta linha
-            Container(
-              margin: EdgeInsets.all(20.0),
-              padding: EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                color: Colors.blue[100],
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                'R\$ ' + total.toStringAsFixed(2),
-                style: TextStyle(
-                    fontSize: 28,
-                    color: Colors.black), // Altere o tamanho da fonte e a cor
-              ),
+            SizedBox(height: 10),
+            Consumer<GastoProvider>(
+              builder: (context, gastoProvider, child) {
+                return Container(
+                  margin: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.blue[100],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text(
+                    'R\$ ' + gastoProvider.totalGastos.toStringAsFixed(2),
+                    style: TextStyle(fontSize: 28, color: Colors.black),
+                  ),
+                );
+              },
             ),
             Spacer(flex: 2),
           ],
@@ -67,10 +53,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => GastosPage(
-                    onGastosUpdated:
-                        _updateGastos)), // Passa o callback para atualizar os gastos
+            MaterialPageRoute(builder: (context) => GastosPage()),
           );
         },
         label: Text('Ver Gastos', style: TextStyle(color: Colors.white)),

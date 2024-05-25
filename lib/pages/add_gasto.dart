@@ -146,121 +146,128 @@ class _AddGastoState extends State<AddGasto> {
         onSettingsPressed: () {},
         context: context,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 40.0), // Increased margin below AppBar
-            Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    decoration: _buildInputDecoration('Título'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira um título';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) => _titulo = value!,
-                  ),
-                  const SizedBox(height: 10.0),
-                  TextFormField(
-                    decoration: _buildInputDecoration('Valor'),
-                    keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira um valor';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) => _valor = double.parse(value!),
-                  ),
-                  const SizedBox(height: 10.0),
-                  TextFormField(
-                    controller: _dataController,
-                    decoration: _buildInputDecoration('Data'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, selecione uma data';
-                      }
-                      return null;
-                    },
-                    onTap: () async {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      await _selectDate(context);
-                    },
-                  ),
-                  const SizedBox(height: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Categoria',
-                          style: TextStyle(fontSize: 16.0),
-                        ),
-                        Center(
-                          child: GestureDetector(
-                            onTap: _pickIcon,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey[200],
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              padding: const EdgeInsets.all(20),
-                              child: Icon(
-                                _categoriaIcone,
-                                color: _categoriaCor,
-                                size: 40,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 10.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10.0,
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 40.0), // Increased margin below AppBar
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      decoration: _buildInputDecoration('Título'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, insira um título';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) => _titulo = value!,
+                    ),
+                    const SizedBox(height: 10.0),
+                    TextFormField(
+                      decoration: _buildInputDecoration('Valor'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, insira um valor';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) => _valor = double.parse(value!),
+                    ),
+                    const SizedBox(height: 10.0),
+                    TextFormField(
+                      controller: _dataController,
+                      decoration: _buildInputDecoration('Data'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, selecione uma data';
+                        }
+                        return null;
+                      },
+                      onTap: () async {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        await _selectDate(context);
+                      },
+                    ),
+                    const SizedBox(height: 10.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Categoria',
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                          Center(
+                            child: GestureDetector(
+                              onTap: _pickIcon,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[200],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                padding: const EdgeInsets.all(20),
+                                child: Icon(
+                                  _categoriaIcone,
+                                  color: _categoriaCor,
+                                  size: 40,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        if (_categoriaIcone == Icons.category &&
-                            _categoriaCor == Colors.black)
-                          const Padding(
-                            padding: EdgeInsets.only(top: 5.0),
-                            child: Text(
-                              'Por favor, selecione uma categoria',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 12.0),
+                          if (_categoriaIcone == Icons.category &&
+                              _categoriaCor == Colors.black)
+                            const Padding(
+                              padding: EdgeInsets.only(top: 5.0),
+                              child: Text(
+                                'Por favor, selecione uma categoria',
+                                style: TextStyle(
+                                    color: Colors.red, fontSize: 12.0),
+                              ),
                             ),
-                          ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        ],
                       ),
                     ),
-                    onPressed: _saveForm,
-                    child: const Text(
-                      'Salvar',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    const SizedBox(height: 20.0),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      onPressed: _saveForm,
+                      child: const Text(
+                        'Salvar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

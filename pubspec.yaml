@@ -17,6 +17,8 @@ dependencies:
     sdk: flutter
   pie_chart: ^5.0.0 # Adicionado aqui
   flutter_svg: ^2.0.10+1
+  provider: ^6.0.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

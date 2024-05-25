@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 import 'pages/start_page.dart';
+import 'pages/gasto_provider.dart'; // Importe o GastoProvider
 
 void main() {
   runApp(MyApp());
@@ -15,21 +17,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'App de Gastos',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => GastoProvider()),
+      ],
+      child: MaterialApp(
+        title: 'App de Gastos',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: logado ? HomePage() : StartPage(),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('pt', 'BR'),
+        ],
+        debugShowCheckedModeBanner: false, // Remova o banner de depuração
       ),
-      home: logado ? HomePage() : StartPage(),
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('pt', 'BR'),
-      ],
-      debugShowCheckedModeBanner: false, // Remova o banner de depuração
     );
   }
 }

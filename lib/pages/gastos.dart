@@ -1,66 +1,15 @@
+// ignore_for_file: unused_import
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'gasto.dart'; // Importe a classe Gasto
-import 'add_gasto.dart'; // Importe a classe AddGasto
-import 'appbar/app_bar.dart'; // Importe a classe CustomAppBar
+import 'gasto.dart';
+import 'add_gasto.dart';
+import 'appbar/app_bar.dart';
+import 'gasto_provider.dart';
 
-// Esta é a sua página de gastos
-class GastosPage extends StatefulWidget {
-  final Function(List<Gasto>) onGastosUpdated;
-
-  GastosPage({required this.onGastosUpdated});
-
-  @override
-  _GastosPageState createState() =>
-      _GastosPageState(); // Alterado de '_CategoriesPageState' para '_GastosPageState'
-}
-
-class _GastosPageState extends State<GastosPage> {
-  // Esta é a lista de gastos
-  final List<Gasto> _gastos = [];
-
-  // Esta é a cor do ícone
-  Color _iconColor = Colors.black;
-
-  // Este método adiciona um gasto à lista de gastos
-  void _addGasto(Gasto gasto) {
-    setState(() {
-      _gastos.add(gasto);
-      widget.onGastosUpdated(_gastos);
-    });
-  }
-
-  // Este método mostra um diálogo para escolher uma cor
-  void _showColorPickerDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Escolha uma cor'),
-          content: SingleChildScrollView(
-            child: ColorPicker(
-              pickerColor: _iconColor,
-              onColorChanged: (Color color) {
-                setState(() {
-                  _iconColor = color;
-                });
-              },
-              showLabel: true,
-              pickerAreaHeightPercent: 0.8,
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+class GastosPage extends StatelessWidget {
+  const GastosPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +21,62 @@ class _GastosPageState extends State<GastosPage> {
         context: context,
       ),
       body: Container(
-        margin: EdgeInsets.all(10.0), // Adicionado margem de 10.0
+        margin: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-                'Bem-vindo à página de Gastos!'), // Alterado de 'Categorias' para 'Gastos'
-            Expanded(
-              child: ListView(
-                children: _gastos.map((gasto) => GastoWidget(gasto)).toList(),
-              ),
+            Consumer<GastoProvider>(
+              builder: (context, gastoProvider, child) {
+                if (gastoProvider.gastos.isEmpty) {
+                  return const Expanded(
+                    child: Center(
+                      child: Text(
+                        'Nenhum gasto adicionado no momento.',
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: gastoProvider.gastos.length,
+                      itemBuilder: (context, index) {
+                        final gasto = gastoProvider.gastos[index];
+                        return Dismissible(
+                          key: Key(gasto.titulo),
+                          direction: DismissDirection.endToStart,
+                          onDismissed: (direction) {
+                            gastoProvider.removeGasto(gasto);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('${gasto.titulo} removido'),
+                              ),
+                            );
+                          },
+                          background: Container(
+                            color: Colors.red,
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            alignment: AlignmentDirectional.centerEnd,
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: ListTile(
+                            leading: Icon(gasto.categoriaIcone,
+                                color: gasto.categoriaCor),
+                            title: Text(gasto.titulo),
+                            subtitle: Text(
+                                DateFormat('dd/MM/yyyy').format(gasto.data)),
+                            trailing:
+                                Text('R\$ ${gasto.valor.toStringAsFixed(2)}'),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
+              },
             ),
           ],
         ),
@@ -90,11 +85,18 @@ class _GastosPageState extends State<GastosPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddGasto(_addGasto)),
+            MaterialPageRoute(
+                builder: (context) => AddGasto(
+                      (gasto) {
+                        Provider.of<GastoProvider>(context, listen: false)
+                            .addGasto(gasto);
+                      },
+                    )),
           );
         },
-        label: Text('Adicionar Gasto', style: TextStyle(color: Colors.white)),
-        icon: Icon(Icons.add, color: Colors.white),
+        label: const Text('Adicionar Gasto',
+            style: TextStyle(color: Colors.white)),
+        icon: const Icon(Icons.add, color: Colors.white),
         backgroundColor: Colors.blue,
       ),
     );
