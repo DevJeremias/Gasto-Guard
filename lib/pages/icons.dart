@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CategoriaIcone {
   final String nome;
-  final IconData icone;
-  final Color cor;
+  IconData icone;
+  Color cor;
   final double valor_gasto; // Adicionando um campo para o valor gasto
 
   CategoriaIcone(this.nome, this.icone, this.cor,
