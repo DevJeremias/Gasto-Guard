@@ -6,16 +6,19 @@ import 'appbar/app_bar.dart'; // Importe a classe CustomAppBar
 
 // Esta é a sua página de gastos
 class GastosPage extends StatefulWidget {
-  // Alterado de 'CategoriesPage' para 'GastosPage'
+  final Function(List<Gasto>) onGastosUpdated;
+
+  GastosPage({required this.onGastosUpdated});
+
   @override
   _GastosPageState createState() =>
       _GastosPageState(); // Alterado de '_CategoriesPageState' para '_GastosPageState'
 }
 
 class _GastosPageState extends State<GastosPage> {
-  // Alterado de '_CategoriesPageState' para '_GastosPageState'
   // Esta é a lista de gastos
   final List<Gasto> _gastos = [];
+
   // Esta é a cor do ícone
   Color _iconColor = Colors.black;
 
@@ -23,6 +26,7 @@ class _GastosPageState extends State<GastosPage> {
   void _addGasto(Gasto gasto) {
     setState(() {
       _gastos.add(gasto);
+      widget.onGastosUpdated(_gastos);
     });
   }
 
@@ -68,7 +72,6 @@ class _GastosPageState extends State<GastosPage> {
         context: context,
       ),
       body: Container(
-        // Adicionado um Container para ocupar toda a tela
         margin: EdgeInsets.all(10.0), // Adicionado margem de 10.0
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -76,9 +79,7 @@ class _GastosPageState extends State<GastosPage> {
             Text(
                 'Bem-vindo à página de Gastos!'), // Alterado de 'Categorias' para 'Gastos'
             Expanded(
-              // Adicionado um widget Expanded para ocupar o espaço restante
               child: ListView(
-                // Adicionado um ListView para exibir a lista de gastos
                 children: _gastos.map((gasto) => GastoWidget(gasto)).toList(),
               ),
             ),

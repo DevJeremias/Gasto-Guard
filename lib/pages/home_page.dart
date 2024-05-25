@@ -2,11 +2,28 @@ import 'package:flutter/material.dart';
 import 'appbar/app_bar.dart';
 import 'gastos.dart'; // Alterado de 'categories.dart' para 'gastos.dart'
 import 'recursos/grafico.dart'; // Adicione esta linha
+import 'gasto.dart'; // Importe a classe Gasto
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Gasto> _gastos = [];
+
+  double get total {
+    return _gastos.fold(0, (sum, item) => sum + item.valor);
+  }
+
+  void _updateGastos(List<Gasto> gastos) {
+    setState(() {
+      _gastos = gastos;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    double total = 1000.00;
     return Scaffold(
       appBar: CustomAppBar(
         titleText: 'Gasto Guard',
@@ -51,8 +68,9 @@ class HomePage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    GastosPage()), // Alterado de 'CategoriesPage()' para 'GastosPage()'
+                builder: (context) => GastosPage(
+                    onGastosUpdated:
+                        _updateGastos)), // Passa o callback para atualizar os gastos
           );
         },
         label: Text('Ver Gastos', style: TextStyle(color: Colors.white)),
