@@ -22,16 +22,24 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Spacer(flex: 3),
             PieChartWidget.createWithSampleData(), // Adicione esta linha
+            SizedBox(height: 20), // Adicione esta linha
+            Text(
+              'Total de Gastos',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10), // Adicione esta linha
             Container(
               margin: EdgeInsets.all(20.0),
               padding: EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Colors.red[100],
+                color: Colors.blue[100],
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Text(
                 'R\$ ' + total.toStringAsFixed(2),
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(
+                    fontSize: 28,
+                    color: Colors.black), // Altere o tamanho da fonte e a cor
               ),
             ),
             Spacer(flex: 2),
