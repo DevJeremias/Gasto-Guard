@@ -27,7 +27,7 @@ class PieChartWidget extends StatelessWidget {
       legendOptions: LegendOptions(
         showLegendsInRow: false,
         legendPosition: LegendPosition.right,
-        showLegends: false,
+        showLegends: true,
         legendShape: BoxShape.circle,
         legendTextStyle: TextStyle(
           fontWeight: FontWeight.bold,
