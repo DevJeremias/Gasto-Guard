@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'; // Importe o pacote flutter_localizations
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'pages/home_page.dart';
-import 'pages/start_page.dart'; // Importe o arquivo start.dart
+import 'pages/start_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +9,6 @@ void main() {
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  // Defina a variável logado
   bool logado = false;
 
   MyApp({super.key});
@@ -21,19 +20,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: logado
-          ? HomePage()
-          : StartPage(), // Se logado for true, HomePage é chamada, senão StartPage é chamada
+      home: logado ? HomePage() : StartPage(),
       localizationsDelegates: [
-        // Adicione esta linha
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        // Adicione esta linha
-        const Locale('pt', 'BR'), // Português do Brasil
+        const Locale('pt', 'BR'),
       ],
+      debugShowCheckedModeBanner: false, // Remova o banner de depuração
     );
   }
 }
