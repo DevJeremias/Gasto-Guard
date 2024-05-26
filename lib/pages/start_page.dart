@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'cadastrar.dart';
-import 'home_page.dart'; // Importe o pacote flutter_svg
+import 'home_page.dart';
 
 class StartPage extends StatelessWidget {
   @override
@@ -17,8 +17,18 @@ class StartPage extends StatelessWidget {
             // Substitua o Text pelo seu logotipo SVG
             SvgPicture.asset(
               'lib/logotipo/gasto_guard_logo.svg', // Caminho para o seu logotipo
-              width: 100, // Defina a largura desejada
-              height: 100, // Defina a altura desejada
+              width: 150, // Defina a largura desejada
+              height: 150, // Defina a altura desejada
+              color: Colors.white, // Altere a cor do logotipo para branco
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Bem-vindo ao Gasto Guard!',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 20),
             Container(
