@@ -3,7 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 import 'pages/start_page.dart';
-import 'pages/gasto_provider.dart'; // Importe o GastoProvider
+import 'pages/gasto_provider.dart';
+import 'pages/categoria_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => GastoProvider()),
+        ChangeNotifierProvider(create: (_) => CategoriaProvider()),
       ],
       child: MaterialApp(
         title: 'App de Gastos',
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: [
           const Locale('pt', 'BR'),
         ],
-        debugShowCheckedModeBanner: false, // Remova o banner de depuração
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
