@@ -2,6 +2,9 @@ name: gastoapk
 description: "A new Flutter project."
 publish_to: "none"
 
+android:
+  applicationId: "com.example.gastoguardapk"
+
 version: 1.0.0+1
 
 environment:
