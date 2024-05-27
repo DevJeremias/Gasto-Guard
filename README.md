@@ -18,26 +18,26 @@ A estrutura do código-fonte do Gasto Guard é organizada da seguinte maneira:
 
 lib/
 ├── logotipo/
-│ └── gasto_guard_logo.svg
-├── pages/
-│ ├── appbar/
-│ │ ├── app_bar.dart
-│ │ ├── configura_categorias.dart
-│ │ ├── configura_perfil.dart
-│ │ └── configura.dart
-│ ├── recursos/
-│ │ ├── grafico.dart
-│ │ ├── icones.dart
-│ │ ├── add_gasto.dart
-│ │ ├── cadastrar.dart
-│ │ ├── categoria_provider.dart
-│ │ ├── gasto_provider.dart
-│ │ ├── gasto.dart
-│ │ ├── gastos.dart
-│ │ ├── home_page.dart
-│ │ ├── icons.dart
-│ │ └── start_page.dart
-└── main.dart
+│   └── gasto_guard_logo.svg
+└── pages/
+    ├── appbar/
+    │   ├── app_bar.dart
+    │   ├── configura_categorias.dart
+    │   ├── configura_perfil.dart
+    │   └── configura.dart
+    └── recursos/
+        ├── grafico.dart
+        ├── icones.dart
+        ├── add_gasto.dart
+        ├── cadastrar.dart
+        ├── categoria_provider.dart
+        ├── gasto_provider.dart
+        ├── gasto.dart
+        ├── gastos.dart
+        ├── home_page.dart
+        ├── icons.dart
+        └── start_page.dart
+
 
 
 ## Possíveis Melhorias Futuras
